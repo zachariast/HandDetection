@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HandTrackJs</title>
+<style>
+    div{
+        background: #f38f8f;
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        border-radius: 100%;
+        will-change: top left;
+    }
+    
+    canvas,video{
+        display: none !important;
+        border:solid 2px black;
+    }
+</style>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <video id="video"></video>
+    <div id="move"></div>
+    <div id="move2"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/handtrackjs/dist/handtrack.min.js"> </script>
+    <script src="./js/app.js"></script>
+</body>
+</html> 

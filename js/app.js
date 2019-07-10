@@ -1,0 +1,52 @@
+const modelParams = {
+	flipHorizontal: true,
+	maxNumBoxes: 2,
+	iouThreshold: 0.5,
+	scoreThreshold: 0.6
+};
+
+navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+const video = document.querySelector('#video');
+const canvas = document.querySelector('#canvas');
+const div = document.querySelector('#move');
+const div2 = document.querySelector('#move2');
+const context = canvas.getContext('2d');
+let model;
+
+function css(el, styles) {
+	for (var property in styles) el.style[property] = styles[property];
+}
+
+handTrack.startVideo(video).then((status) => {
+	if (status) {
+		navigator.getUserMedia(
+			{ video: {} },
+			(stream) => {
+				video.srcObject = stream;
+				runDetection();
+			},
+			(err) => {
+				// console.log(err)
+			}
+		);
+	}
+});
+
+function runDetection() {
+	model.detect(video).then((predictions) => {
+		model.renderPredictions(predictions, canvas, context, video);
+		requestAnimationFrame(runDetection);
+
+		var x = predictions[0].bbox[0];
+		var y = predictions[0].bbox[1];
+		css(div, { left: x + 'px', top: y + 'px' });
+		var x2 = predictions[1].bbox[0];
+		var y2 = predictions[1].bbox[1];
+		css(div2, { left: x2 + 'px', top: y2 + 'px' });
+	});
+}
+
+handTrack.load(modelParams).then((lmodel) => {
+	model = lmodel;
+});
