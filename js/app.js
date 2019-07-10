@@ -2,7 +2,7 @@ const modelParams = {
   flipHorizontal: true,
   maxNumBoxes: 20,
   iouThreshold: 0.5,
-  scoreThreshold: 0.6
+  scoreThreshold: 0.7
 };
 
 navigator.getUserMedia =
@@ -45,8 +45,8 @@ function runDetection() {
     var y = predictions[0].bbox[1];
     var ww = jQuery(window).width();
     var wh = jQuery(window).height();
-    var x_perc = (x / ww) * 100;
-    var y_perc = (y / wh) * 100;
+    var x_perc = (x / ww) * 100 * 2;
+    var y_perc = (y / wh) * 100 * 2;
     css(div, {
       left: Math.round(x_perc) + "vw",
       top: Math.round(y_perc) + "vh"
@@ -54,8 +54,8 @@ function runDetection() {
     if (predictions[1]) {
       var x2 = predictions[1].bbox[0];
       var y2 = predictions[1].bbox[1];
-      var x_perc2 = (x2 / ww) * 100;
-      var y_perc2 = (y2 / wh) * 100;
+      var x_perc2 = (x2 / ww) * 100 * 2;
+      var y_perc2 = (y2 / wh) * 100 * 2;
       css(div2, {
         display: "block",
         left: Math.round(x_perc2) + "vw",
