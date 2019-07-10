@@ -2,7 +2,7 @@ const modelParams = {
   flipHorizontal: true,
   maxNumBoxes: 20,
   iouThreshold: 0.5,
-  scoreThreshold: 0.45
+  scoreThreshold: 0.6
 };
 
 navigator.getUserMedia =
